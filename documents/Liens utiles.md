@@ -1,5 +1,5 @@
 Création d'une interface graphique en C :
-  https://openclassrooms.com/fr/courses/19980-apprenez-a-programmer-en-c/17546-creation-dune-fenetre-et-de-surfaces
+  -https://openclassrooms.com/fr/courses/19980-apprenez-a-programmer-en-c/17546-creation-dune-fenetre-et-de-surfaces
 Algorithme de Dijkstra fonctionnement général : 
   - https://fr.wikipedia.org/wiki/Algorithme_de_Dijkstra
   - https://www.maths-cours.fr/methode/algorithme-de-dijkstra-etape-par-etape/
