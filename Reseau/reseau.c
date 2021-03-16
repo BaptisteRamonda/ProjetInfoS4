@@ -28,6 +28,7 @@ struct s_reseau {
     Ville * tVille;  //toutes les villes accessibles grace au réseau
     int nbVille;
     Trajet * tTrajets; //tous les trajets possibles, de proche en proche
+    int nbTrajet;
 };
 /** 
  * prototype non nécéssaires a mettre dans le point h
@@ -241,6 +242,24 @@ Reseau creerReseau() { // la seule fonction qu'on utilisera vraiment
             }
         }
     }
+
+    r->tTrajets = calloc(NBVILLE, sizeof(Trajet));
+    r->nbTrajet = 0;
+    for (int l = 0; l < r->nbLigne; l ++) {
+        for (int i = 0; i < (r->tLignes[l]->nbEtapes - 1); i ++) {
+            int dejaDedans = 0;                     //on ne veut pas de doublons alors
+            for (int n = 0; n < r->nbTrajet; n ++) { // on verifie que la ville qu'on ajoute au tableau n'est pas déja comprise dans le tableau
+                if (r->tLignes[l]->tTrajetsPartiels[i]->depart == r->tTrajets[n]->depart && r->tLignes[l]->tTrajetsPartiels[i]->arrivee == r->tTrajets[n]->arrivee && r->tLignes[l]->tTrajetsPartiels[i]->temps == r->tTrajets[n]->temps) {
+                    dejaDedans = 1;
+                }
+            }
+            if (dejaDedans == 0) {
+                r->tTrajets[r->nbTrajet] = initialiseTrajet(r->tLignes[l]->tEtapes[i], r->tLignes[l]->tEtapes[i + 1]);
+                r->tTrajets[r->nbTrajet]->temps = r->tLignes[l]->tTrajetsPartiels[i]->temps;
+                r->nbTrajet ++;
+            }
+        }
+    }
     return r;
 }
 
@@ -252,5 +271,6 @@ int main() {
         printf ("\n");
     }
     printf( "OK\n");
+    printf("%d", r->nbTrajet);
     return 0;
 }
